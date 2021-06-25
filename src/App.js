@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // Styles
 import './App.css';
@@ -12,34 +13,29 @@ import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up
 import Header from './components/header/header.component';
 // FireBase
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+// Redux
+import { setCurrentUser } from './redux/user/user.actions';
 
 class App extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      currentUser: null
-    }
-  } // end of constructor
 
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const {setCurrentUser} = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data()
-            } // end of currentUser:
-          });  // end of this.setState
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          }); // end of setCurrentUser
         }); // end of userRef
       } // end of if (userAuth)
       else {
-        this.setState({currentUser: userAuth}); // userAuth will be null here i.e. user is logged out
+        setCurrentUser(userAuth) // userAuth will be null here i.e. user is logged out
       } // end of else
     }); // end of this.unsubscribeFromAuth = auth.
   } // end of componentDidMount
@@ -53,7 +49,7 @@ class App extends React.Component {
       <div>
         {/* Header is placed outside of switch in order to stay on all pages */}
         {/* Header needs to be aware when a user is signed in/out */}
-        <Header currentUser={this.state.currentUser}/>
+        <Header />
         {/* Switch is used to control the routes on pages and navigation */}
         <Switch>
           <Route exact path='/' component={HomePage}/>
@@ -65,4 +61,10 @@ class App extends React.Component {
   } // end of render
 } // end of class App
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  // dispatch(setCurrentUser(user)) is returning the object from setCurrentUser from user.action
+  // Dispatch is a way to let react know that what we are passing is an .action
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(App);

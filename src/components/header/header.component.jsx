@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'; // HOC that let's the component access redux
 
 // Link is used for links routing in react
 import { Link } from 'react-router-dom';
@@ -25,6 +26,12 @@ const Header = ({ currentUser }) => (
             }
         </div>
     </div>
-)
+);
 
-export default Header;
+// This naming is standard with redux code bases, i.e. mapState...
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+});
+
+// HOC - wrapping around the Header, takes 2 parameters. this function and the component
+export default connect(mapStateToProps)(Header);
