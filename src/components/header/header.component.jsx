@@ -1,5 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'; // HOC that let's the component access redux
+// reselect and selectors
+import { createStructuredSelector } from 'reselect';
+import { selectCartHidden } from '../../redux/cart/cart.selector';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 
 // Link is used for links routing in react
 import { Link } from 'react-router-dom';
@@ -38,9 +42,10 @@ const Header = ({ currentUser, hidden }) => (
 );
 
 // This naming is standard with redux code bases, i.e. mapState...
-const mapStateToProps = ({user: { currentUser }, cart: { hidden }}) => ({
-    currentUser,
-    hidden
+// creatStructuredSelector knows the top level state and will send the state to the selectors stated below
+const mapStateToProps = createStructuredSelector ({
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 });
 
 // HOC - wrapping around the Header, takes 2 parameters. this function and the component
