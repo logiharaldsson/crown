@@ -29,9 +29,11 @@ const Header = ({ currentUser, hidden }) => (
             }
             <CartIcon />
         </div> {/* end of option div */}
+        {/* Ternary operator for the CartDropdown. If clicked it will unHide */}
         {
             hidden ? null:
-            <CartDropdown />}
+            <CartDropdown />
+        } 
     </div>
 );
 
