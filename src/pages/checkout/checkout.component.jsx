@@ -27,6 +27,7 @@ const CheckoutPage = ({ cartItems, totalPrice}) => (
             </div>
         </div> {/* end of header component */} 
         {
+            // mapping each item to be displayed on checkout page. 
             cartItems.map(cartItem => 
                 <CheckoutItem key={cartItem.id} cartItem={cartItem} />
             )
