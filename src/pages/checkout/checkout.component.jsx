@@ -5,6 +5,7 @@ import { selectCartItems, selectCartTotalPrice } from '../../redux/cart/cart.sel
 import { createStructuredSelector } from 'reselect';
 // Components
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 // Styles
 import './checkout.styles.scss';
 
@@ -26,16 +27,20 @@ const CheckoutPage = ({ cartItems, totalPrice}) => (
             <div className="header-block">
                 <span>Remove</span>
             </div>
-        </div> {/* end of header component */} 
+        </div> 
         {
             // mapping each item to be displayed on checkout page. 
             cartItems.map(cartItem => 
                 <CheckoutItem key={cartItem.id} cartItem={cartItem} />
             )
         }
-        <div className="total">
-            <span>Total: ${totalPrice}</span>
+        <div className="total"><span>Total: ${totalPrice}</span></div>
+        <div className="test-warning">
+            *Please use the following test credit card for payments*
+            <br />
+            4242 4242 4242 4242 - Exp: 07/21 - CVV: 323
         </div>
+        <StripeCheckoutButton price={totalPrice} />
     </div>
 );
 
