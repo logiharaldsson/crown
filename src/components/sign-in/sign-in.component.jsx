@@ -1,12 +1,9 @@
 import React from 'react';
-
 // styles
 import './sign-in.styles.scss';
-
 // components
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-
 // DB and Auth
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
