@@ -1,18 +1,67 @@
 .contact-page {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    margin-top: 80px;
+    display: flex;
+    // justify-content: center;
+    justify-content: space-evenly;
+
+    .about-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 400px;
+        text-align: justify;
+
+        .f3 {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            margin: 0;
+            margin-top: 10px;
+        }
+    }
+    
+    .flex-box-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .image-container {
+        border-radius: 50%;
+        width: 180px;
+        height: 180px;
+        overflow: hidden;
+
+    
+        .image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            // margin-bottom: 5px;
+        }
+    }
+    .creator {
+        color: black;
+        text-align: center;
+
+        .creator-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .creator-title {
+            margin: 0;
+            font-size: 20px;
+            
+        }
+    }
 }
+
 
 .container {
     height: 100px;
     width: auto;
 }
 
-.image {
-    width: 100%;
-    height: 95%;
-    background-size: cover;
-    background-position: center;
-    margin-bottom: 5px;
-  }
+
+

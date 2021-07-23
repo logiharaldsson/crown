@@ -1,0 +1,16 @@
+contact page/footer:
+    -> email / location / opening hours / phone
+
+collection images:
+    -> click to magnify. Not a new page, pop-up styled
+
+products to sell:
+    -> get photos of things you want to sell
+    -> detailed information about them
+
+like / heart products:
+    -> another cart for liked products
+
+filter:
+    -> search bar
+    -> filter out based on size 
